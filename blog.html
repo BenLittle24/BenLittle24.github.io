@@ -57,8 +57,48 @@
         <p>I expect the biggest impediments at this point will be the size of the codebase I’m trying to work with 
             and my unfamiliarity. I also expect some growing pains in setting up the development environment.</p>
 
-        <h2>June 18 – Website Creation and More</h2>
-        <p>Placeholder</p>
+        <h2>June 19 – Website Creation and Research</h2>
+        <p>Last week, I set up my personal website, which turned out to be more challenging and engaging 
+          than I expected. Like many others, I used GitHub pages and started with pretty simple functionality. 
+          Without a doubt there is room for improvement, but I'm satisfied with where it stands for now. </p>
+
+        <p>Apart from that, I started exploring Stardew's codebase and some of the SMAPI documentation. 
+          I'll admit I'm more than a bit behind where I hoped to be, but I think I made good use of the time I had. 
+          It wasn't the most productive, but I spent some time sharpening the saw and I hope this will save time 
+          later on. I definitely underestimated how long the ramp up would take too, the saw was dull. </p>
+
+        <p>My goals for next week haven't changed much, I still want to build a simple proof of concept feature 
+          that responds to an in game event. Once that's working, I'll move on to the EOD diary prompt and UI. 
+          I hope that the time spent exploring and getting familiar with the codebase will pay off and 
+          save time in the future. </p>
+
+        <p>I'm not aware of any major blockers, just the usual cocktail of limited time, other responsibilities, 
+          and trying to build something I'm still figuring out how to build. </p>
+
+
+        <h2>June 26 – Setting up Environment and Proof of Concept</h2>
+        <p>While I don’t think last week was a waste of time, I made more tangible progress this week. I was able to set up my dev environment, find and customize a SMAPI mod template to work successfully enough for a proof of concept, and got a decent start on the EOD diary entry. </p>
+
+        <p>The dev environment was the first challenge, and I wonder how much of it was because I’m using macOS. I’ve used Wine and Bootcamp previously to work with Windows programs, but used Mono and .NET SDK to work with Stardew’s older .NET framework here. I needed Mono to build .NET Framework projects on macOS since, as I understand it, Stardew and SMAPI both require .NET Framework 4.5. Then I installed .NET SDK with Homebrew to get access to dotnet build to build my mod. 
+</p>
+        <p>After that I started working with the mod template, which was just a community SMAPI mod template I cloned from GitHub. This was helpful as it was a working starting point with the right structure, basic config files, and build settings, but I did have to modify manifest.json and .csproj files to target net45 and produce clean and singular build output files.
+</p>
+        <p>From there I made the first, very basic mod and confirmed that it could load in game. As a test, I had it log a message in the SMAPI console and write a line to diary.txt at the end of the day, which worked! I did initially plan on sending myself in game mail as the proof of concept, but decided that the end of day event would be easier to hook into, compared to a mail game event that is less frequent and harder to predict, or would require additional work to trigger intentionally. 
+</p>
+        <p>With my concept proven, I started experimenting with showing a diary prompt for the user to add a custom entry. I used the existing NamingMenu game UI, which, for the uninitiated, is typically used to give animals a name. I’ll have to expand or improve on this at some point, but it works well for this stage of development. 
+</p>
+        <p>I tried a couple of event hooks like DayEnding, DayStarted, and Saving, but these either didn’t work or blocked game progression. DayStarted is the best approach so far, and does save the diary entry without the player needing to progress to the next save point, even though this occurs after game save. So on the bright side, if I made an entry it was being saved in diary.txt, but I couldn’t move past the diary entry after completing it. I also made it so that if the entry field was blank, nothing would save to diary.txt, so the diary won’t be cluttered with empty entries. </p>
+        
+        <p>For next week, there are a few known issues I’d like to fix. Unsurprisingly, the main goal is to rework the diary prompt so it doesn’t stall the game. Using DayStarted is my most recent approach and I haven’t had the time to identify the cause of the problem yet. Then the UI for the diary entry is less than ideal, it’s too small and has a character limit. 
+</p>
+        <p>Once the diary entry feature is usable, I’ll start to focus on in-game retrieval, which brings up another issue. Currently, diary.txt is not save file specific, so diary entries from any save file are stored in a single diary.txt file. This will definitely need to be addressed, but is not a high priority at this time. 
+</p>
+        <p>For impediments, figuring out the right time to show the UI without breaking the game and with a functional diary entry has been tricky. I’ve been doing a lot of trial and error, which can be time consuming. But getting the environment set up and confirming the mod could load with some degree of functionality was a big step. 
+</p>
+
+
+
+~ </p>
 
 
       </section>
