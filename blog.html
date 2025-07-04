@@ -96,7 +96,15 @@
         <p>For impediments, figuring out the right time to show the UI without breaking the game and with a functional diary entry has been tricky. I’ve been doing a lot of trial and error, which can be time consuming. But getting the environment set up and confirming the mod could load with some degree of functionality was a big step. 
 </p>
 
-
+        <h2>July 3 – Diary Entry Prompt Progress</h2>
+        <p>Last week, my main focus was fixing and improving the diary prompt functionality and UI, and I made some significant progress. The most pressing issue was that the diary prompt was blocking the game from progressing. While I thought this was going to be a challenge, it was actually simpler than expected, I just didn’t understand the cause of the issue. I spent some time barking up several wrong trees before realizing that the NamingMenu UI I was adapting didn’t properly exit the active menu when the OK button was pressed, allowing the game to continue. My adapted menu had all the other functionality from its original use, but not this, which was a surprise. Thankfully, it wasn’t a difficult fix after figuring this out. 
+</p>
+        <p>From there, I started working on an improved UI for the diary entry. The NamingMenu was good for testing the game event hooks and diary entry saves, but has a small window and character limit. I started experimenting with making my own custom UI, but this has been a challenge. One issue is that pressing hotkeys while typing the entry will close the prompt. For example, when typing “test,” pressing “e” would open the inventory and close the prompt, leaving the saved diary entry as “te.” I was able to fix the input capture so that typing works as expected, but the visual layout still needs some polishing. 
+</p>
+        <p>Next week, I hope I can finish the UI for the diary entry and transition to recalling past diary entries in game. Currently, all diary entries are just in a diary.txt file. With this, I’ll need to make diary entries save file specific so that the in-game recall only shows entries from that specific save file. 
+</p>
+        <p>I’m not aware of any major impediments apart from the constants like time constraints and lack of knowledge, but I think I worked through these well this past week and hope to continue. That said, I don’t feel I have a solid plan on how to make the diary entries save file specific and recall them in-game. I think I can probably build off of existing game features like the quest journal, but there is a lot to learn before I can attempt this. 
+</p>
 
 ~ </p>
 
