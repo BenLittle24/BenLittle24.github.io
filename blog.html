@@ -134,6 +134,46 @@
          <p>My impediments are the limitations of the built-in TextBox, I’ve already spent too much time working on this aspect of the project and it has slowed progress considerably. Additionally, every test of the UI requires building the mod files, loading the game, and ending the in-game day to evaluate the changes I’ve made. While this doesn’t seem too time consuming, it certainly adds up. 
          </p>
 
+
+
+         <h2>July 31 – UI Breakthrough</h2>
+
+         <p>This week felt like a significant leap forward for the diary entry feature! It’s finally starting to behave like the proper multiline text box I envisioned. To recap, I had been running into UI layout and text wrapping issues and was considering scrapping the built in text entry system I had started with. In hindsight, the built in text entry worked well as a proof of concept for hooking into save events, presenting the prompt, and confirming that the diary entries were saved, but it came with limitations that made adapting it to my goals difficult. To be fair, I think it’s possible, but the amount of workaround seemed prohibitive. In the most technical terms, I’m not sure the juice is worth the squeeze. </p>
+
+         <p>Instead, I started building a custom input and rendering system, which has been working surprisingly well, but is not without issues. For the text wrapping, I tried using a manual, per character routine that breaks lines when they exceed the set text area’s width. This is functional, and solves the problem of long strings running off of the edge of the text entry field, but the per character line wrapping method is a stand in while I work on per word line wrapping. As it stands now, a new line will happen whenever the max text width is exceeded, but with no consideration for where the line breaks. It’s nostalgic in a way, I haven’t seen text wrapping like this since my early memories of the internet. </p>
+
+         <p>With this change came another frustrating but familiar issue: pressing certain keys (hotkeys) during text entry would trigger in game actions and close the diary prompt. For example, typing “test” would open the inventory and cancel the menu as soon as you hit “e.” The conflicts happened because the game is still listening for global hotkeys, even while the diary text box was active. To fix this, I changed how the game handles keyboard input while the diary is open as I had done in the past. </p>
+
+         <p>Currently, the main issue preventing me from moving forward is that the text entry doesn’t properly support deleting characters. I can’t remove text once it’s been typed, which makes editing mistakes or revising a sentence impossible. Fixing this issue is my top priority before I move on to other features.</p>
+
+
+         <h2>August 7 – UI Finetuning and Success</h2>
+
+         <p>Last week I finetuned the diary entry UI and it’s finally behaving in a way that I am satisfied with! The main changes were the line wrapping, backspace functionality, and adding a header prompt. For the line wrapping, I changed to word boundary wrapping so words won’t split mid line. 
+</p>
+
+        <p>With the backspace functionality, the issue was that pressing the key wasn’t doing anything in the text entry. The cause was that the key press wasn’t passing through properly, it was being treated like a hotkey, which I previously blocked while the diary entry prompt was open to fix a different issue. I forgot that backspace was a hotkey at the time, but with this change, backspace removes characters as expected during text entry. 
+</p>
+
+        <p>Finally, I added a small header prompt. Initially, I had guessed and checked the header height, but ended up measuring the header text and pushing the input area down by the same amount for clean spacing.
+
+        </p>
+
+        <p>For the coming week, I’m a little torn on where to start. One option is that I need an in-game viewer for past diary entries, which I envision as something similar to the quest journal, where the player can click an icon to open a list of past entries sorted by entry date. From there, the player can click on individual entries to expand them. To do this, I’ll need to read and parse diary.txt, where all entries are currently saved.
+</p>
+
+        <p>The other option/issue is that diary.txt is global at the moment, not save file specific. This means that entries from different farms or test saves all get mixed together, and I don’t know of a clean way to filter them in game. So do I start working on the UI first, or the data first? 
+</p>
+
+        <p>With UI first, I’d build the in-game viewer using the current global diary.txt file, which I think would give a faster, demo ready proof of concept. I would still need to update the saving system later though, and while I don’t expect I would need to completely rework the viewer, I don’t know how much adaptation might be needed after changing the saving system. 
+</p>
+
+        <p>On the other hand, I could work on the data first and avoid the reworking/adaptation of the viewer, it would be aligned with or built off of the final structure from the start. I wouldn’t be able to demonstrate the functionality until the new storage system was in place though, which is a consideration.
+</p>
+
+        <p>I’m open to any input! This is my main impediment at the moment. If time wasn’t a factor, I would work on the saving system first and then move on to the viewer UI, but we’re close to the end of the project and I’d like to have something to show off, even if it isn’t strictly necessary. 
+</p>
+
 ~ </p>
 
 
